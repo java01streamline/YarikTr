@@ -31,9 +31,9 @@ public class Translieter {
 
         String str;
         while ((str = br.readLine()) != null) {
-            String en = str.substring(0, str.indexOf("-"));
+            String en = str.substring(0, str.indexOf("-")).replace("\t", "");
             english.add(en);
-            String ru = str.substring(str.indexOf("-"));
+            String ru = str.substring(str.indexOf("-") + 1).replace("\t", "").trim();
             russian.add(ru);
         }
 
@@ -41,34 +41,49 @@ public class Translieter {
     }
     public static String ok = "";
 
-    public static String findEn(String wordEN) {
+    /*public static String findEn(String wordEN) {
         String ret = null;
         //implementetion search
 
         for (int i = 0; i < english.size(); i++) {
-            if (english.get(i).equals(Main.s)) {
-                
-ret = english.get(i);
+            if (russian.get(i).equals(Main.s)) {
 
-break;
+                ret = english.get(i);
+
+                break;
 
             }
         }
 
         return ret;
-    }
-public static String findRus(String wordEN) {
+    }*/
+
+    public static String findRus(String wordRU) {
         String ret = null;
         //implementetion search
 
-        for (int i = 0; i < english.size(); i++) {
-            if (english.get(i).equals(russian.get(i))) {
-               
-ret = russian.get(i);
-break;
+        for (int i = 0; i < russian.size(); i++) {
+            if (english.get(i).equals(wordRU)) {
+
+                ret = russian.get(i);
+                break;
             }
         }
-    
+
         return ret;
     }
+
+    public static String findRusEN(String word) {
+        String ret = "Not found";
+        for (int i = 0; i < russian.size(); i++) {
+            if (russian.get(i).equals(word)) {
+                return english.get(i);
+            }
+            if(english.get(i).equals(word)){
+                return russian.get(i);
+            }
+        }
+        return ret;
+    }
+
 }

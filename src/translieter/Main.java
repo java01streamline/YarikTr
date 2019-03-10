@@ -5,10 +5,13 @@
  */
 package translieter;
 
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+
+import static translieter.Translieter.findRusEN;
 import static translieter.Translieter.ok;
 
 /**
@@ -17,13 +20,12 @@ import static translieter.Translieter.ok;
  */
 public class Main extends javax.swing.JFrame {
 
-    int num;
-    public static String s = "";
+    public static int num = 0;
 
-    Main(){
+    Main() {
         initComponents();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,6 +40,11 @@ public class Main extends javax.swing.JFrame {
         In = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formKeyTyped(evt);
+            }
+        });
 
         jButton1.setText("Перевести");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -54,6 +61,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         In.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        In.setText("wolf");
         In.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 InActionPerformed(evt);
@@ -106,15 +114,16 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_InActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        num = 1;
-        s = In.getText();
-       
-        Translieter.findEn(s);
-        Out.setText(Translieter.findRus(s));
-        
-        
+   Out.setText(Translieter.findRusEN(In.getText())); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formKeyTyped
+
+   
+      
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextField In;
     public javax.swing.JTextField Out;
